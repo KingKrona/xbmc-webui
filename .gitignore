@@ -5,3 +5,6 @@
 # Generated files
 *.pyc
 
+# Config files
+/settings.py
+
