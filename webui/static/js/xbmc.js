@@ -22,11 +22,21 @@ xbmc.factory('XbmcApi', function($resource) {
     );
 });
 
-xbmc.filter('thumb', function() {
-        return function(html) {
-            return html.replace(/<thumb.*>(.*)<\/thumb>/, "$1");
+xbmc.directive('thumbnail', function() {
+    return {
+        restrict: 'E',
+        template: '<img ng-src="{/url/}"></img>',
+        link: function(scope, element, attrs, ctrl) {
+            scope.url = '/static/img/movie-reel.jpg';
+            if (attrs['source']) {
+                url = $(scope.$eval(attrs['source'])).first().text();
+                if (url) {
+                    scope.url = url;
+                }
+            }
         }
-    });
+    }
+});
 
 xbmc.controller('MovieCtrl', function ($scope, XbmcApi) {
     $scope.movies = XbmcApi.get({

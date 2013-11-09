@@ -5,11 +5,13 @@
         <h2>Recently added episodes</h2>
         <div class="row episode" ng-repeat="episode in episodes.objects">
             <div class="span2">
-                <img src="{/episode.thumbnail_url|thumb/}" />
+                <thumbnail source=" episode.thumbnail_url"></thumbnail>
             </div>
             <div class="span10">
                 <h3>{/episode.tvshow.title/}</h3>
-                {/episode.season/}x{/episode.episode|pad:2:'0'/} - {/episode.title/}
+                <p>{/episode.season/}x{/episode.episode|pad:2:'0'/} - {/episode.title/}</p>
+                <p>{/episode.plot_summary/}</p>
+                <rating value="episode.rating" max="10" readonly>
             </div>
         </div>
         <button class="btn btn-small" ng-click="more()"><i class="icon icon-plus"></i> Fetch more</button>
@@ -18,10 +20,15 @@
         <h2>Recently added Movies</h2>
         <div class="row episode" ng-repeat="movie in movies.objects">
             <div class="span2">
-                <img src="{/movie.thumbnails|thumb/}" />
+                <thumbnail source="movie.thumbnails"></thumbnail>
             </div>
             <div class="span10">
-                <h3>{/movie.title/}</h3>
+                <h3>
+                    {/movie.title/}<br />
+                    <small>{/movie.tagline/}</small>
+                </h3>
+                <p>{/movie.plot_summary/}</p>
+                <rating value="movie.rating" max="10" readonly>
             </div>
         </div>
         <button class="btn btn-small" ng-click="more()"><i class="icon icon-plus"></i> Fetch more</button>
