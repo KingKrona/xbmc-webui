@@ -1,0 +1,29 @@
+{% extends "default.html" %}
+{% load url from future %}
+{% block content%}
+    <div class="span5 container-fluid" ng-controller="EpisodeCtrl">
+        <h2>Recently added episodes</h2>
+        <div class="row episode" ng-repeat="episode in episodes.objects">
+            <div class="span2">
+                <img src="{/episode.thumbnail_url|thumb/}" />
+            </div>
+            <div class="span10">
+                <h3>{/episode.tvshow.title/}</h3>
+                {/episode.season/}x{/episode.episode|pad:2:'0'/} - {/episode.title/}
+            </div>
+        </div>
+        <button class="btn btn-small" ng-click="more()"><i class="icon icon-plus"></i> Fetch more</button>
+    </div>
+    <div class="span5 container-fluid" ng-controller="MovieCtrl">
+        <h2>Recently added Movies</h2>
+        <div class="row episode" ng-repeat="movie in movies.objects">
+            <div class="span2">
+                <img src="{/movie.thumbnails|thumb/}" />
+            </div>
+            <div class="span10">
+                <h3>{/movie.title/}</h3>
+            </div>
+        </div>
+        <button class="btn btn-small" ng-click="more()"><i class="icon icon-plus"></i> Fetch more</button>
+    </div>
+{% endblock %}
